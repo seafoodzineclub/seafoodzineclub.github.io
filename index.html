@@ -5,95 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>seafoodzineclub</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Apple SD Gothic Neo', sans-serif;
-      background: #f9f9f9;
-      color: #222;
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f4f0;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
     }
     header {
-      padding: 80px 40px 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    header h1 { font-size: 2rem; font-weight: 700; }
-    header p { margin-top: 12px; color: #666; font-size: 1rem; line-height: 1.7; }
-    .sns {
-      margin-top: 20px;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 32px 48px;
+      z-index: 100;
       display: flex;
-      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: #222;
+      letter-spacing: 0.02em;
+    }
+    .bio {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 4px;
+      font-weight: 300;
+    }
+    .sns {
+      display: flex;
+      gap: 20px;
+      padding-top: 4px;
     }
     .sns a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: #999;
       text-decoration: none;
-      color: #222;
-      border: 1px solid #222;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
     }
-    .sns a:hover { background: #222; color: #fff; }
-    section {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 40px;
-    }
-    section h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .sns a:hover { color: #222; }
+    #tank {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
     }
     .card {
+      position: absolute;
+      width: 200px;
       background: #fff;
-      border: 1px solid #eee;
       border-radius: 12px;
-      padding: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+      will-change: transform;
     }
-    .card h3 { font-size: 1rem; font-weight: 600; }
-    .card p { margin-top: 8px; color: #888; font-size: 0.9rem; }
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #aaa;
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      z-index: 10;
+    }
+    .card-thumb {
+      width: 100%;
+      height: 130px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .card-body {
+      padding: 12px 14px;
+    }
+    .card-title {
       font-size: 0.8rem;
+      font-weight: 500;
+      color: #222;
+    }
+    .card-sub {
+      font-size: 0.7rem;
+      color: #bbb;
+      margin-top: 2px;
+      font-weight: 300;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>seafoodzineclub 👋</h1>
-    <p>안녕하세요! 여기에 자기소개를 써주세요.<br>어떤 작업을 하는지, 어떤 사람인지 짧게 소개해봐요.</p>
-    <div class="sns">
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-      <a href="#">GitHub</a>
-    </div>
-  </header>
+<header>
+  <div>
+    <div class="name">seafoodzineclub</div>
+    <div class="bio">여기에 짧은 소개를 써주세요</div>
+  </div>
+  <nav class="sns">
+    <a href="#">instagram</a>
+    <a href="#">twitter</a>
+    <a href="#">github</a>
+  </nav>
+</header>
 
-  <section>
-    <h2>작업물</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>작업물 제목 1</h3>
-        <p>작업물 설명을 여기에 써주세요.</p>
-      </div>
-      <div class="card">
-        <h3>작업물 제목 2</h3>
-        <p>작업물 설명을 여기에 써주세요.</p>
-      </div>
-      <div class="card">
-        <h3>작업물 제목 3</h3>
-        <p>작업물 설명을 여기에 써주세요.</p>
-      </div>
-      <div class="card">
-        <h3>작업물 제목 4</h3>
-        <p>작업물 설명을 여기에 써주세요.</p>
-      </div>
-    </div>
-  </section>
+<div id="tank"></div>
 
-  <footer>© 2026 seafoodzineclub</footer>
+<script>
+  const works = [
+    { emoji: '🐟', title: '작업물 1', sub: '2024' },
+    { emoji: '🌊', title: '작업물 2', sub: '2024' },
+    { emoji: '🐠', title: '작업물 3', sub: '2023' },
+    { emoji: '🪸', title: '작업물 4', sub: '2023' },
+    { emoji: '🐡', title: '작업물 5', sub: '2023' },
+    { emoji: '🦑', title: '작업물 6', sub: '2022' },
+  ];
+
+  const tank = document.getElementById('tank');
+  const W = () => window.innerWidth;
+  const H = () => window.innerHeight;
+  const CW = 200, CH = 178;
+  const REPEL = 240;
+  const DAMP = 0.97;
+  const FORCE = 0.015;
+  const MAX_V = 0.7;
+  const MARGIN = 80;
+
+  const fish = works.map((w, i) => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="card-thumb">${w.emoji}</div>
+      <div class="card-body">
+        <div class="card-title">${w.title}</div>
+        <div class="card-sub">${w.sub}</div>
+      </div>`;
+    tank.appendChild(el);
+
+    const cols = 3;
+    const startX = 120 + (i % cols) * 260;
+    const startY = 140 + Math.floor(i / cols) * 220;
+
+    return {
+      el,
+      x: startX,
+      y: startY,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+    };
+  });
+
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function tick() {
+    const w = W(), h = H();
+    fish.forEach((f, i) => {
+      f.vx += (Math.random() - 0.5) * FORCE;
+      f.vy += (Math.random() - 0.5) * FORCE;
+
+      fish.forEach((other, j) => {
+        if (i === j) return;
+        const dx = f.x - other.x;
+        const dy = f.y - other.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < REPEL && dist > 0) {
+          const str = (REPEL - dist) / REPEL * 0.04;
+          f.vx += (dx / dist) * str;
+          f.vy += (dy / dist) * str;
+        }
+      });
+
+      if (f.x < MARGIN) f.vx += 0.05;
+      if (f.x > w - CW - MARGIN) f.vx -= 0.05;
+      if (f.y < MARGIN + 60) f.vy += 0.05;
+      if (f.y > h - CH - MARGIN) f.vy -= 0.05;
+
+      f.vx = clamp(f.vx * DAMP, -MAX_V, MAX_V);
+      f.vy = clamp(f.vy * DAMP, -MAX_V, MAX_V);
+
+      f.x = clamp(f.x + f.vx, MARGIN, w - CW - MARGIN);
+      f.y = clamp(f.y + f.vy, MARGIN + 60, h - CH - MARGIN);
+
+      f.el.style.transform = `translate(${f.x}px, ${f.y}px)`;
+    });
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+</script>
 
 </body>
 </html>
